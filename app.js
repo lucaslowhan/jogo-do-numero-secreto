@@ -1,4 +1,6 @@
 // Nomeando o título e o parágrafo
+let listaDeNumerosSorteados = [];
+let numerLimite = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 function exibirTextoNaTela(tag, texto){
@@ -29,7 +31,18 @@ function verificarChute() {
     }
 }
 function gerarNumeroAleatorio(){
-    return parseInt(Math.random() * 10 + 1);
+    let numeroEscolhido = parseInt(Math.random() * numerLimite + 1);
+    let quantidadeElementosNaLista = listaDeNumerosSorteados.length;
+
+    if (quantidadeElementosNaLista == numerLimite){
+        listaDeNumerosSorteados = [];
+    }
+    if (listaDeNumerosSorteados.includes(numeroEscolhido)){
+        return gerarNumeroAleatorio();
+    }else{
+        listaDeNumerosSorteados.push(numeroEscolhido);
+        return numeroEscolhido;
+    }
 }
 function limparCampo(){
     chute = document.querySelector('input').value = '';
